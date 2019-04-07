@@ -24,15 +24,22 @@ export class MovieService {
 
   }
 
-  searchData(title: string, type: SearchType): Observable<any> {
-    return this.http
-    .get(`${this.url}?s=${encodeURI(title)}&type=${type}&apikey=${this.movieConfig.apiKey}`)
-    .pipe(
-      map(results => results['Search'])
-    );
+  searchData(title: string, type: SearchType) {
+
+      return this.http
+      .get(`${this.url}?s=${encodeURI(title)}&type=${type}&apikey=${this.movieConfig.apiKey}`)
+      .pipe(
+        map(results => results['Search'])
+      );
+    
   }
 
   getDetails(id) {
-    return this.http.get(`${this.url}?i=${id}&plot=full&apikey=${this.movieConfig.apiKey}`);
+      return this.http.get(`${this.url}?i=${id}&plot=full&apikey=${this.movieConfig.apiKey}`);
+  }
+
+  getDetailsFromJSON(filename: string)
+  {
+    return this.http.get(`../../assets/movies/${filename}`);
   }
 }

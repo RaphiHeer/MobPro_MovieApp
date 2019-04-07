@@ -19,11 +19,19 @@ export class MovieDetailsPage implements OnInit {
   ngOnInit() {
     // Get the ID that was passed with the URL
     let id = this.activatedRoute.snapshot.paramMap.get('id');
-
+    console.log(id.search('.json'));
     // Get the information from the API
-    this.movieService.getDetails(id).subscribe(result => {
-      this.information = result;
-    });
+    if(id.search('.json') == 1 )
+    {
+      this.movieService.getDetailsFromJSON(id).subscribe(result => {
+        this.information = result;
+      });
+    } else {
+      this.movieService.getDetails(id).subscribe(result => {
+        this.information = result;
+        console.log(this.information);
+      });
+    }
   }
 
   openWebsite() {
