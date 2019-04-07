@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
   { path: 'native', loadChildren: './native/native.module#NativePageModule' },
   { path: 'movie-details', loadChildren: './movie-details/movie-details.module#MovieDetailsPageModule' },
-  { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesPageModule' }
+  { path: 'movie-details/:id', loadChildren: './movie-details/movie-details.module#MovieDetailsPageModule' },
+  { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesPageModule' },
 ];
 
 @NgModule({

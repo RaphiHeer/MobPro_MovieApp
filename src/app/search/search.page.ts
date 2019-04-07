@@ -1,9 +1,12 @@
+import { MovieService } from './../services/movie.service';
 import { environment } from './../../environments/environment';
 import { MovieConfig } from './../../environments/movieConfig';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Movie } from 'src/interfaces/Movie';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { SearchType } from '../services/movie.service';
 
 @Component({
   selector: 'app-search',
@@ -12,11 +15,15 @@ import { Router } from '@angular/router';
 })
 export class SearchPage implements OnInit {
 
+  results: Observable<any>;
+  searchTerm: string = '';
+  type: SearchType = SearchType.all;
+
   private searchedMovie: string;
   private movieConfig: MovieConfig;
 
   constructor(
-    private httpClient: HttpClient,
+    private movieService: MovieService,
     private router: Router
      ) {
       this.movieConfig = new MovieConfig();
@@ -25,6 +32,11 @@ export class SearchPage implements OnInit {
   ngOnInit() {
   }
 
+  searchChanged() {
+    this.results = this.movieService.searchData(this.searchTerm, this.type);
+  }
+
+  /*
   searchMovieClicked() {
     let filmsObservable;
     console.log(`Searched Movie: ${this.searchedMovie}`);
@@ -50,4 +62,5 @@ export class SearchPage implements OnInit {
       console.log('my data: ', data);
     });
   }
+  */
 }

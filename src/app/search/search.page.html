@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -8,9 +8,42 @@
 </ion-header>
 
 <ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
+ 
+  <ion-item>
+    <ion-label>Select Searchtype</ion-label>
+    <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
+      <ion-select-option value="">All</ion-select-option>
+      <ion-select-option value="movie">Movie</ion-select-option>
+      <ion-select-option value="series">Series</ion-select-option>
+      <ion-select-option value="episode">Episode</ion-select-option>
+    </ion-select>
+  </ion-item>
+ 
+  <ion-list>
+ 
+    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'movie-details', item.imdbID]">
+      <ion-avatar slot="start">
+        <img [src]="item.Poster" *ngIf="item.Poster != 'N/A'">
+      </ion-avatar>
+ 
+      <ion-label text-wrap>
+        <h3>{{ item.Title }}</h3>
+        {{ item.Year }}
+      </ion-label>
+ 
+      <ion-icon slot="end" *ngIf="item.Type == 'movie'" name="videocam"></ion-icon>
+      <ion-icon slot="end" *ngIf="item.Type == 'series'" name="tv"></ion-icon>
+      <ion-icon slot="end" *ngIf="item.Type == 'game'" name="logo-game-controller-b"></ion-icon>
+ 
+    </ion-item>
+ 
+  </ion-list>
+<!--
   <ion-item>
     <ion-label position="floating">Search for Movie here...</ion-label>
     <ion-input type="text" [(ngModel)]="searchedMovie"></ion-input>
     <ion-button expand="block" (click)="searchMovieClicked()"><ion-icon name="search"></ion-icon>Start the Search!</ion-button>
   </ion-item>
+-->
 </ion-content>
