@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Search for a Movie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Search for Movie here...</ion-label>
+    <ion-input type="text" [(ngModel)]="searchedMovie"></ion-input>
+    <ion-button expand="block" (click)="searchMovieClicked()"><ion-icon name="search"></ion-icon>Start the Search!</ion-button>
+  </ion-item>
+</ion-content>
